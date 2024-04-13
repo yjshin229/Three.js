@@ -41,12 +41,19 @@ const example = () => {
   //needs the scene and the camera
   renderer.render(scene, camera);
 
+  const clock = new THREE.Clock();
+
   const draw = () => {
     //rotation uses radian degree
     //360  = 2pi,
     // mesh.rotation.y += 0.1;
     //or could use degToRad
-    mesh.rotation.y += THREE.MathUtils.degToRad(2);
+    // mesh.rotation.y += THREE.MathUtils.degToRad(2);
+
+    //for device spec purpose, using time could be a good method to use depending on what app ur making
+    // bc animation depends on time.
+    const time = clock.getElapsedTime();
+    mesh.rotation.y = time;
     renderer.render(scene, camera);
 
     //repeat requestAnimationFrame
