@@ -13,9 +13,13 @@ const example = () => {
   //add opacity to background
   // renderer.setClearAlpha(0.5);
   //add color to background
-  renderer.setClearColor("blue");
+  // renderer.setClearColor("blue");
 
   const scene = new THREE.Scene();
+
+  //adding color to the background to the scene.
+  //ignores the renderer color. it goes on top of the renderer.
+  scene.background = new THREE.Color("blue");
 
   const camera = new THREE.PerspectiveCamera(
     75,
