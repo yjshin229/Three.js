@@ -26,4 +26,6 @@ lib-cov/
 coverage/
 *.lcov
 
-#
+#DS_Store
+
+.DS_Store
