@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import Stats from "stats.js";
 
-// ----- FPS check
+// ----- GUI (dat.gui)
 
 export default function example() {
   // Renderer
