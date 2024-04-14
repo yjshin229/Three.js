@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import Stats from "stats.js";
+import dat from "dat.gui";
 
 // ----- GUI (dat.gui)
 
@@ -43,18 +43,37 @@ export default function example() {
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
-  //Stats
-  const stats = new Stats();
-  document.body.append(stats.domElement);
+  //dat GUI
+
+  const gui = new dat.GUI();
+  //what object, what I should control, min, max, how much
+  //   gui.add(mesh.position, "y", -5, 5, 0.01).name("y position");
+  // can also write this way
+  gui
+    .add(mesh.position, "z")
+    .min(-10)
+    .max(3)
+    .step(0.01)
+    .name("mesh z position");
+  gui
+    .add(camera.position, "x")
+    .min(-10)
+    .max(3)
+    .step(0.01)
+    .name("camera x position");
+
+  //make the camera look at the mesh
+  camera.lookAt(mesh.position);
 
   // render
   const clock = new THREE.Clock();
 
   function draw() {
     const time = clock.getElapsedTime();
-
-    stats.update();
     mesh.rotation.y = time;
+
+    //also needs to add look at here.
+    camera.lookAt(mesh.position);
 
     renderer.render(scene, camera);
     renderer.setAnimationLoop(draw);
