@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import { FlyControls } from "three/examples/jsm/controls/FlyControls";
+import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
 
-// FlyControls
+// FirstPersonControls
 
 export default function example() {
   // Renderer
