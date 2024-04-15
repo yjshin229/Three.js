@@ -1,7 +1,6 @@
 import * as THREE from "three";
-import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
-
-// FirstPersonControls
+import { DragControls } from "three/examples/jsm/controls/DragControls";
+// DragControls
 
 export default function example() {
   // Renderer
@@ -36,14 +35,9 @@ export default function example() {
   directionalLight.position.z = 2;
   scene.add(directionalLight);
 
-  // Controls
-
-  const control = new FirstPersonControls(camera, renderer.domElement);
-  control.rollSpeed = 0.1;
-  control.dragToLook = true;
-
   // Mesh
   const geometry = new THREE.BoxGeometry(1, 1, 1);
+  const meshes = [];
 
   let mesh;
   let material;
@@ -60,14 +54,19 @@ export default function example() {
     mesh.position.z = (Math.random() - 0.5) * 5;
 
     scene.add(mesh);
+    meshes.push(mesh);
   }
+
+  // Controls
+
+  //need to add what to drag, therefore need to be called after defining the object
+  const control = new DragControls(meshes, camera, renderer.domElement);
+
   // 그리기
   const clock = new THREE.Clock();
 
   function draw() {
     const delta = clock.getDelta();
-
-    control.update(delta);
 
     renderer.render(scene, camera);
     renderer.setAnimationLoop(draw);

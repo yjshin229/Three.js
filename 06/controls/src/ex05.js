@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import { FirstPersonControls } from "three/examples/jsm/controls/FirstPersonControls";
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
 
-// FirstPersonControls
+// PointerLockControls
 
 export default function example() {
   // Renderer
@@ -38,9 +38,18 @@ export default function example() {
 
   // Controls
 
-  const control = new FirstPersonControls(camera, renderer.domElement);
-  control.rollSpeed = 0.1;
-  control.dragToLook = true;
+  const control = new PointerLockControls(camera, renderer.domElement);
+  control.domElement.addEventListener(`click`, () => {
+    control.lock();
+  });
+
+  control.addEventListener("lock", () => {
+    console.log("lock!");
+  });
+
+  control.addEventListener("unlock", () => {
+    console.log("unlock!");
+  });
 
   // Mesh
   const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -66,8 +75,6 @@ export default function example() {
 
   function draw() {
     const delta = clock.getDelta();
-
-    control.update(delta);
 
     renderer.render(scene, camera);
     renderer.setAnimationLoop(draw);
