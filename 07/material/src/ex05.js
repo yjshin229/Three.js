@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-// ----- FlatShading
+// ----- Mesh Face
 
 export default function example() {
   // Renderer
@@ -41,23 +41,16 @@ export default function example() {
   const controls = new OrbitControls(camera, renderer.domElement);
 
   // Mesh
-  const geometry = new THREE.SphereGeometry(1, 16, 16);
+  const geometry = new THREE.BoxGeometry(1, 1, 1);
   //No highlight, no reflection
   const materialLambert = new THREE.MeshStandardMaterial({
     color: "orange",
-    //각진 표현
-    flatShading: true,
+    //choose which side to see when inside. (FrontSide, BackSide, DoubleSide)
+    side: THREE.BackSide,
   });
-  // highlight,  reflection. Therefore can add how much shininess and highlight
-  const materialPhong = new THREE.MeshPhongMaterial({
-    color: "orange",
-    flatShading: true,
-  });
-  const mesh1 = new THREE.Mesh(geometry, materialLambert);
-  const mesh2 = new THREE.Mesh(geometry, materialPhong);
-  mesh1.position.x = -1.5;
-  mesh2.position.x = 1.5;
-  scene.add(mesh1, mesh2);
+
+  const mesh = new THREE.Mesh(geometry, materialLambert);
+  scene.add(mesh);
 
   // 그리기
   const clock = new THREE.Clock();
