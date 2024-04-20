@@ -71,7 +71,7 @@ export default function example() {
   //No highlight, no reflection
   const materialLambert = new THREE.MeshBasicMaterial({
     color: "orangered",
-    // map: texture,
+    map: textureBase,
   });
 
   const mesh = new THREE.Mesh(geometry, materialLambert);
