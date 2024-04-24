@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
 // ----- Mesh Toon Material
 
 export default function example() {
